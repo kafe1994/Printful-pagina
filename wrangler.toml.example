@@ -1,0 +1,26 @@
+# Configuración de Cloudflare Wrangler para el proyecto
+# Copia este contenido a wrangler.toml en la raíz de tu proyecto
+
+name = "dress-ac1"
+compatibility_date = "2023-12-18"
+
+# Directorio de salida de build
+pages_build_output_dir = "."
+
+# Variables de entorno (configurar en Cloudflare Dashboard)
+[env.production.vars]
+PRINTFUL_API_KEY = "tu_api_key_aqui"
+
+[env.preview.vars]
+PRINTFUL_API_KEY = "tu_api_key_aqui"
+
+[env.local.vars]
+PRINTFUL_API_KEY = "tu_api_key_aqui"
+
+# Configuración de límites de ejecución
+[limits]
+cpu_ms = 30  # Límite de tiempo de CPU
+
+# Configuración de Smart Placement (Beta)
+[placement]
+mode = "smart"

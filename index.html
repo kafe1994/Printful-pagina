@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DRESS - Ropa personalizada única y accesorios para expresar tu estilo individual. Envío mundial rápido y personalización de alta calidad.">
+    <meta name="keywords" content="ropa personalizada, camisetas personalizadas, sudaderas personalizadas, gorras personalizadas, tazas personalizadas, accesorios personalizados, print on demand">
+    <meta name="author" content="DRESS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="DRESS - Ropa Personalizada & Accesorios">
+    <meta property="og:description" content="Expresa tu estilo con nuestra exclusiva colección de ropa personalizada y accesorios únicos.">
+    <meta property="og:image" content="portada/hero_ropa_minimalista.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="DRESS - Ropa Personalizada & Accesorios">
+    <meta property="twitter:description" content="Expresa tu estilo con nuestra exclusiva colección de ropa personalizada y accesorios únicos.">
+    <meta property="twitter:image" content="portada/hero_ropa_minimalista.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo/favicon.ico">
+    <link rel="apple-touch-icon" href="logo/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animation.css">
+    
+    <title>DRESS - Ropa Personalizada & Accesorios Únicos</title>
+</head>
+<body>
+    <!-- Navegación Principal -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo/465978489_574650888390477_11877544773037545_n (1).jpg" alt="DRESS Logo" class="logo-img">
+            </div>
+            <h1 class="brand-name">DRESS</h1>
+            <div class="nav-menu" role="menubar">
+                <a href="#catalog" class="nav-link" role="menuitem">Catálogo</a>
+                <a href="#recommendations" class="nav-link" role="menuitem">¿Por Qué Elegirnos?</a>
+                <a href="#about" class="nav-link" role="menuitem">Acerca de</a>
+                <a href="#terms" class="nav-link" role="menuitem">Términos</a>
+            </div>
+            <div class="mobile-menu-toggle" role="button" aria-label="Abrir menú móvil" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Hero Slider -->
+        <section class="hero-slider" aria-label="Presentación principal">
+            <div class="slider-container">
+                <div class="slide active" style="background-image: url('portada/hero_ropa_minimalista.png');" aria-hidden="false">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Ropa & Accesorios Únicos</h2>
+                        <p class="slide-subtitle">Expresa tu estilo con nuestros diseños exclusivos personalizados</p>
+                        <button class="cta-button" aria-label="Comprar ahora">Comprar Ahora</button>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('portada/productos_destacados.png');" aria-hidden="true">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Impresión Premium</h2>
+                        <p class="slide-subtitle">Moda de alta calidad para el estilo de vida moderno</p>
+                        <button class="cta-button" aria-label="Explorar colección">Explorar Colección</button>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('portada/productos_destacados_1.png');" aria-hidden="true">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Envío Mundial</h2>
+                        <p class="slide-subtitle">Envío rápido a la mayoría de países con seguimiento confiable</p>
+                        <button class="cta-button" aria-label="Ordenar hoy">Ordenar Hoy</button>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('portada/productos_destacados_minimal.png');" aria-hidden="true">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Hecho Personalizado para Ti</h2>
+                        <p class="slide-subtitle">Diseños personalizados que reflejan tu personalidad única</p>
+                        <button class="cta-button" aria-label="Comenzar">Comenzar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls" aria-label="Controles del carrusel">
+                <button class="slider-prev" aria-label="Slide anterior">‹</button>
+                <button class="slider-next" aria-label="Slide siguiente">›</button>
+            </div>
+            <div class="slider-dots" role="tablist" aria-label="Navegación de slides">
+                <span class="dot active" data-slide="0" role="tab" aria-label="Ir al slide 1" aria-selected="true"></span>
+                <span class="dot" data-slide="1" role="tab" aria-label="Ir al slide 2" aria-selected="false"></span>
+                <span class="dot" data-slide="2" role="tab" aria-label="Ir al slide 3" aria-selected="false"></span>
+                <span class="dot" data-slide="3" role="tab" aria-label="Ir al slide 4" aria-selected="false"></span>
+            </div>
+        </section>
+
+        <!-- Sección Catálogo -->
+        <section id="catalog" class="catalog-section" aria-labelledby="catalog-title">
+            <div class="container">
+                <h2 id="catalog-title" class="section-title">Compra por Categoría</h2>
+                <div class="category-grid">
+                    <article class="category-card" data-category="hoodies" role="button" tabindex="0" aria-label="Ver hoodies">
+                        <img src="catalogo/sudaderas/sudadera_03_all_over_neon.png" alt="Colección de hoodies" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>🧥 Hoodies</h3>
+                            <p>Cómodos y estilosos</p>
+                        </div>
+                    </article>
+                    <article class="category-card" data-category="tshirts" role="button" tabindex="0" aria-label="Ver camisetas">
+                        <img src="catalogo/remeras/remera_20_celestial.png" alt="Colección de camisetas" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>👕 Camisetas</h3>
+                            <p>Casuales y modernas</p>
+                        </div>
+                    </article>
+                    <article class="category-card" data-category="caps" role="button" tabindex="0" aria-label="Ver gorras">
+                        <img src="catalogo/gorras/gorra_07_sport.png" alt="Colección de gorras" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>🧢 Gorras</h3>
+                            <p>Deportivas y geniales</p>
+                        </div>
+                    </article>
+                    <article class="category-card" data-category="mugs" role="button" tabindex="0" aria-label="Ver tazas">
+                        <img src="catalogo/tazas/taza_17_extra.png" alt="Colección de tazas" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>☕ Tazas</h3>
+                            <p>Esenciales diarias</p>
+                        </div>
+                    </article>
+                    <article class="category-card" data-category="accessories" role="button" tabindex="0" aria-label="Ver accesorios">
+                        <img src="catalogo/accessories/minimalist_leather_fashion_accessories_flat_lay_mockup.jpg" alt="Colección de accesorios" loading="lazy">
+                        <div class="category-overlay">
+                            <h3>🎒 Accesorios</h3>
+                            <p>Completa tu estilo</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Productos -->
+        <section class="products-section" aria-labelledby="products-title">
+            <div class="container">
+                <div class="products-header">
+                    <h2 id="products-title" class="section-title">Todos los Productos</h2>
+                    <div class="filter-controls" role="group" aria-label="Filtros de productos">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">Todos</button>
+                        <button class="filter-btn" data-filter="hoodies" aria-pressed="false">Hoodies</button>
+                        <button class="filter-btn" data-filter="tshirts" aria-pressed="false">Camisetas</button>
+                        <button class="filter-btn" data-filter="caps" aria-pressed="false">Gorras</button>
+                        <button class="filter-btn" data-filter="mugs" aria-pressed="false">Tazas</button>
+                        <button class="filter-btn" data-filter="accessories" aria-pressed="false">Accesorios</button>
+                    </div>
+                </div>
+                <div id="products-container" class="products-grid" aria-live="polite">
+                    <!-- Los productos se cargarán aquí dinámicamente -->
+                </div>
+                <div class="loading-spinner" id="loading-spinner" aria-live="polite" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Cargando productos increíbles...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Recomendaciones -->
+        <section id="recommendations" class="recommendations-section" aria-labelledby="recommendations-title">
+            <div class="container">
+                <h2 id="recommendations-title" class="section-title">¿Por Qué Elegir Dress?</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon" role="img" aria-label="Diseños personalizados">🎨</div>
+                        <h3>Diseños Personalizados</h3>
+                        <p>Patrones y diseños únicos que reflejan tu personalidad y preferencias de estilo.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" role="img" aria-label="Envío mundial rápido">🚚</div>
+                        <h3>Envío Mundial Rápido</h3>
+                        <p>Entrega confiable a la mayoría de países con información de seguimiento para tu tranquilidad.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" role="img" aria-label="Calidad premium">✨</div>
+                        <h3>Calidad Premium</h3>
+                        <p>Materiales de alta calidad y técnicas de impresión que aseguran productos duraderos y vibrantes.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" role="img" aria-label="Perfectos para regalos">💝</div>
+                        <h3>Perfectos para Regalos</h3>
+                        <p>Ideales para ocasiones especiales, eventos corporativos o uso personal con mensajes personalizados.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Acerca de -->
+        <section id="about" class="about-section" aria-labelledby="about-title">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 id="about-title" class="section-title">Acerca de Dress</h2>
+                        <p class="about-description">
+                            En Dress, creemos que la ropa es más que solo tela—es un lienzo para la autoexpresión. 
+                            Nuestra misión es proporcionar ropa personalizada única y accesorios de alta calidad que te 
+                            ayuden a destacar entre la multitud.
+                        </p>
+                        <p class="about-description">
+                            Desde hoodies modernos y camisetas cómodas hasta gorras estilosas y tazas para el día a día, 
+                            ofrecemos una diversa gama de productos que pueden ser personalizados para que coincidan con tu visión. 
+                            Nuestro equipo trabaja estrechamente con fabricantes para asegurar que cada artículo cumpla con 
+                            nuestros altos estándares de calidad y diseño.
+                        </p>
+                        <p class="about-description">
+                            Únete a miles de clientes satisfechos en todo el mundo que confían en Dress para sus necesidades 
+                            de ropa personalizada. Exprésate, celebra tu individualidad y luce tu historia con Dress.
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="portada/hero_ropa_minimalista.png" alt="Acerca de Dress - Productos personalizados" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Términos y Condiciones -->
+        <section id="terms" class="terms-section" aria-labelledby="terms-title">
+            <div class="container">
+                <h2 id="terms-title" class="section-title">Términos y Condiciones</h2>
+                <div class="terms-content">
+                    <article class="terms-block">
+                        <h3>Descripción del Servicio</h3>
+                        <p>
+                            Nuestra plataforma actúa como un servicio intermediario conectando clientes con servicios de 
+                            impresión bajo demanda. Facilitamos la creación, personalización y cumplimiento de productos 
+                            personalizados incluyendo ropa, accesorios y otra mercancía.
+                        </p>
+                    </article>
+                    
+                    <article class="terms-block">
+                        <h3>Calidad de Productos y Especificaciones</h3>
+                        <p>
+                            Todos los productos son fabricados por socios de cumplimiento de terceros especializados en 
+                            impresión personalizada y producción de ropa. Trabajamos para asegurar que todos los productos 
+                            cumplan con los estándares de la industria, pero los colores, tamaños y especificaciones exactas 
+                            pueden variar ligeramente de las imágenes de marketing debido a procesos de impresión y 
+                            configuraciones individuales de monitores.
+                        </p>
+                    </article>
+                    
+                    <article class="terms-block">
+                        <h3>Envío y Entrega</h3>
+                        <p>
+                            Los tiempos de envío varían según la ubicación y complejidad del producto. Mientras nos esforzamos 
+                            por una entrega rápida, por favor permite 7-14 días hábiles para la mayoría de pedidos. Los envíos 
+                            internacionales pueden tomar más tiempo debido al procesamiento de aduanas. Se proporcionará 
+                            información de seguimiento cuando esté disponible.
+                        </p>
+                    </article>
+                    
+                    <article class="terms-block">
+                        <h3>Devoluciones y Reembolsos</h3>
+                        <p>
+                            Debido a la naturaleza personalizada de nuestros productos, las devoluciones solo se aceptan para 
+                            defectos de fabricación o artículos que difieran significativamente de las especificaciones. 
+                            Por favor contacta a nuestro equipo de servicio al cliente dentro de 7 días de la entrega 
+                            para cualquier preocupación.
+                        </p>
+                    </article>
+                    
+                    <article class="terms-block">
+                        <h3>Propiedad Intelectual</h3>
+                        <p>
+                            Los clientes son responsables de asegurar que tienen los derechos de usar cualquier diseño, logo 
+                            o texto enviado para personalización. Nos reservamos el derecho de rechazar pedidos que contengan 
+                            material con derechos de autor sin la autorización adecuada.
+                        </p>
+                    </article>
+                    
+                    <article class="terms-block">
+                        <h3>Limitación de Responsabilidad</h3>
+                        <p>
+                            Nuestra responsabilidad está limitada al valor del producto comprado. No somos responsables de 
+                            daños indirectos, consecuenciales o incidentales resultantes del uso de nuestros productos.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DRESS</h3>
+                    <p>Ropa personalizada única y accesorios para expresar tu estilo individual.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#catalog">Catálogo</a></li>
+                        <li><a href="#recommendations">¿Por Qué Elegirnos?</a></li>
+                        <li><a href="#about">Acerca de Nosotros</a></li>
+                        <li><a href="#terms">Términos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: hello@dress.com</p>
+                    <p>Soporte: support@dress.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dress. Todos los derechos reservados. | Ropa única para individuos únicos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "DRESS",
+        "description": "Ropa personalizada única y accesorios para expresar tu estilo individual",
+        "url": "",
+        "logo": "logo/465978489_574650888390477_11877544773037545_n (1).jpg",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@dress.com",
+            "contactType": "customer service"
+        },
+        "sameAs": []
+    }
+    </script>
+</body>
+</html>

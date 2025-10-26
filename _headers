@@ -1,0 +1,25 @@
+# Headers personalizados para Cloudflare Pages
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With
+  Access-Control-Max-Age: 86400
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Headers para el sitio principal
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=3600
+
+# Headers para archivos estáticos
+/static/*
+  Cache-Control: public, max-age=31556952, immutable
+
+/js/*
+  Cache-Control: public, max-age=31556952, immutable
+
+/css/*
+  Cache-Control: public, max-age=31556952, immutable

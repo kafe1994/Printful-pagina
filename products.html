@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explora nuestro catálogo completo de ropa personalizada y accesorios. Encuentra camisetas, hoodies, gorras, tazas y más productos únicos.">
+    <meta name="keywords" content="catálogo productos, ropa personalizada, camisetas, hoodies, gorras, tazas, accesorios, print on demand">
+    <meta name="author" content="DRESS">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Catálogo de Productos - DRESS">
+    <meta property="og:description" content="Explora nuestro catálogo completo de ropa personalizada y accesorios únicos.">
+    <meta property="og:image" content="portada/hero_ropa_minimalista.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Catálogo de Productos - DRESS">
+    <meta property="twitter:description" content="Explora nuestro catálogo completo de ropa personalizada y accesorios únicos.">
+    <meta property="twitter:image" content="portada/hero_ropa_minimalista.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="logo/favicon.ico">
+    <link rel="apple-touch-icon" href="logo/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animation.css">
+    
+    <title>Catálogo de Productos - DRESS</title>
+</head>
+<body>
+    <!-- Navegación Simplificada -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo/465978489_574650888390477_11877544773037545_n (1).jpg" alt="DRESS Logo" class="logo-img">
+            </div>
+            <h1 class="brand-name">DRESS</h1>
+            <div class="nav-menu" role="menubar">
+                <a href="index.html" class="nav-link" role="menuitem">Inicio</a>
+                <a href="index.html#catalog" class="nav-link" role="menuitem">Categorías</a>
+                <a href="index.html#recommendations" class="nav-link" role="menuitem">¿Por Qué Nosotros?</a>
+                <a href="index.html#about" class="nav-link" role="menuitem">Acerca de</a>
+            </div>
+            <div class="mobile-menu-toggle" role="button" aria-label="Abrir menú móvil" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main id="main-content">
+        <!-- Header de Productos -->
+        <header class="products-header" role="banner">
+            <h1>Catálogo de Productos</h1>
+            <p>Descubre nuestra única colección de ropa personalizable y accesorios</p>
+        </header>
+
+        <!-- Filtros de Categorías -->
+        <nav class="category-filter" role="navigation" aria-label="Filtros de productos">
+            <h2>Comprar por Categoría</h2>
+            <div class="filter-buttons" role="group" aria-label="Filtros de categorías">
+                <button class="filter-btn active" data-category="all" aria-pressed="true">Todos los Productos</button>
+                <button class="filter-btn" data-category="hoodies" aria-pressed="false">🧥 Hoodies</button>
+                <button class="filter-btn" data-category="tshirts" aria-pressed="false">👕 Camisetas</button>
+                <button class="filter-btn" data-category="caps" aria-pressed="false">🧢 Gorras</button>
+                <button class="filter-btn" data-category="mugs" aria-pressed="false">☕ Tazas</button>
+                <button class="filter-btn" data-category="accessories" aria-pressed="false">🎒 Accesorios</button>
+            </div>
+        </nav>
+
+        <!-- Grid de Productos -->
+        <section class="products-section" aria-labelledby="products-section-title">
+            <div class="container">
+                <h2 id="products-section-title" class="sr-only">Productos disponibles</h2>
+                
+                <!-- Estadísticas de Productos -->
+                <div class="products-stats">
+                    <span class="results-count" data-stat="total">0</span> productos encontrados
+                </div>
+                
+                <!-- Búsqueda -->
+                <div class="search-container">
+                    <label for="product-search" class="sr-only">Buscar productos</label>
+                    <input type="search" 
+                           id="product-search" 
+                           class="search-input" 
+                           placeholder="Buscar productos..." 
+                           data-search
+                           aria-label="Buscar productos por nombre o tipo">
+                    <button class="search-clear" type="button" aria-label="Limpiar búsqueda" style="display: none;">×</button>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loading-spinner" aria-live="polite" aria-label="Cargando productos">
+                    <div class="spinner"></div>
+                    <p>Cargando productos increíbles...</p>
+                    <div class="loading-dots">⏳</div>
+                </div>
+
+                <!-- Estado Sin Productos -->
+                <div class="no-products" id="no-products" style="display: none;" aria-live="polite">
+                    <h3>No hay productos disponibles</h3>
+                    <p>Estamos actualizando nuestro catálogo. Vuelve pronto para ver nuevos productos personalizados.</p>
+                    <button onclick="resetFilters()" class="btn-primary">Ver Todos los Productos</button>
+                    <button onclick="location.reload()" class="btn-secondary">Actualizar Página</button>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div class="products-grid" id="products-grid" aria-live="polite" aria-busy="true">
+                    <!-- Los productos se cargarán aquí dinámicamente -->
+                </div>
+
+                <!-- Sentinel para scroll infinito -->
+                <div id="infinite-scroll-sentinel"></div>
+            </div>
+        </section>
+
+        <!-- Información Adicional -->
+        <section class="products-info" aria-labelledby="info-title">
+            <div class="container">
+                <h2 id="info-title" class="section-title">¿Por Qué Personalizar con Nosotros?</h2>
+                <div class="info-grid">
+                    <article class="info-card">
+                        <div class="info-icon">🎨</div>
+                        <h3>Diseños Únicos</h3>
+                        <p>Crea productos únicos que reflejen tu personalidad y estilo personal.</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="info-icon">⚡</div>
+                        <h3>Producción Rápida</h3>
+                        <p>Producción bajo demanda con tiempos de entrega optimizados.</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="info-icon">🌍</div>
+                        <h3>Envío Mundial</h3>
+                        <p>Entrega confiable a más de 100 países con seguimiento completo.</p>
+                    </article>
+                    <article class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <h3>Garantía de Calidad</h3>
+                        <p>Materiales premium y garantía de satisfacción en todos nuestros productos.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>DRESS</h3>
+                    <p>Ropa personalizada única y accesorios para expresar tu estilo individual.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#catalog">Catálogo</a></li>
+                        <li><a href="index.html#about">Acerca de</a></li>
+                        <li><a href="index.html#terms">Términos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="mailto:support@dress.com">Soporte Técnico</a></li>
+                        <li><a href="mailto:hello@dress.com">Contacto General</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#guide">Guía de Personalización</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="index.html#terms">Términos de Servicio</a></li>
+                        <li><a href="#privacy">Política de Privacidad</a></li>
+                        <li><a href="#shipping">Política de Envío</a></li>
+                        <li><a href="#returns">Política de Devoluciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dress. Todos los derechos reservados. | Ropa única para individuos únicos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    
+    <!-- CSS adicional para la página de productos -->
+    <style>
+        /* Estilos específicos para la página de productos */
+        .products-header {
+            background: linear-gradient(135deg, var(--background-black), var(--background-dark));
+            color: var(--text-primary);
+            padding: 120px 20px 80px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .products-header h1 {
+            font-size: 3.5rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .products-header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .category-filter {
+            background: var(--background-dark);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .category-filter h2 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            margin: var(--spacing-2xl) auto;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            background: var(--background-dark);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all var(--transition-normal);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .search-clear:hover {
+            color: var(--text-primary);
+        }
+
+        .products-stats {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-2xl);
+        }
+
+        .info-card {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            background: linear-gradient(135deg, var(--background-dark), var(--background-light));
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-normal);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .loading-dots {
+            animation: pulse 2s ease-in-out infinite;
+            font-size: 1.2rem;
+            margin-top: var(--spacing-sm);
+        }
+
+        @media (max-width: 768px) {
+            .products-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-header {
+                padding: 100px 20px 60px;
+            }
+
+            .filter-buttons {
+                gap: var(--spacing-sm);
+            }
+
+            .filter-btn {
+                padding: var(--spacing-xs) var(--spacing-sm);
+                font-size: 0.85rem;
+            }
+
+            .search-container {
+                margin: var(--spacing-lg) auto;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .info-card {
+                padding: var(--spacing-lg);
+            }
+        }
+    </style>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Catálogo de Productos DRESS",
+        "description": "Catálogo completo de ropa personalizada y accesorios",
+        "numberOfItems": "50+",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "Product",
+                    "name": "Camisetas Personalizadas",
+                    "category": "Apparel"
+                }
+            },
+            {
+                "@type": "ListItem", 
+                "position": 2,
+                "item": {
+                    "@type": "Product",
+                    "name": "Hoodies Personalizados",
+                    "category": "Apparel"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "Product", 
+                    "name": "Gorras Personalizadas",
+                    "category": "Accessories"
+                }
+            }
+        ]
+    }
+    </script>
+</body>
+</html>

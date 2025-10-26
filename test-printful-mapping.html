@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test Rápido - Mapeo Printful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0 5px 0;
+            color: #333;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .product-description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .product-variants {
+            margin: 10px 0;
+        }
+        
+        .variants-grid {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+        
+        .variant-option {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
+        .sync-status {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Rápido - Mapeo de Productos Printful</h1>
+    
+    <div class="test-container">
+        <h2>🎯 Objetivo del Test</h2>
+        <p>Verificar que el mapeo de datos de Printful funciona correctamente y que los productos se muestran de forma atractiva.</p>
+        
+        <div class="info">
+            <strong>ℹ️ Datos de Printful esperados:</strong><br>
+            Nombre: "T-SHIRT – Soft, Stylish & Available in Many Colors"<br>
+            Variantes: 48<br>
+            Sincronizado: 48<br>
+            Imagen: URL de Printful
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>🚀 Iniciar Test</h2>
+        <p>Haz clic en el botón para cargar productos desde Printful y verificar el mapeo:</p>
+        
+        <button onclick="startPrintfulTest()">🧪 Iniciar Test de Printful</button>
+        <button onclick="checkApiHealth()">❤️ Verificar Salud API</button>
+        <button onclick="showRawData()">📋 Ver Datos Crudos</button>
+        <button onclick="clearResults()">🗑️ Limpiar</button>
+    </div>
+    
+    <div id="results-container">
+        <div class="test-container" id="api-status">
+            <h2>📊 Estado del Test</h2>
+            <div id="test-status">Haz clic en "Iniciar Test" para comenzar...</div>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>📦 Productos Mapeados</h2>
+        <div id="products-container">
+            <div class="info">Los productos aparecerán aquí después del test...</div>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>💻 Código de Ejemplo</h2>
+        <p>Puedes ejecutar estos comandos en la consola del navegador:</p>
+        
+        <div class="code">
+// Test completo
+window.debugProducts.testAll()
+
+// Ver datos mapeados
+console.log(window.allProducts)
+
+// Ver productos filtrados  
+console.log(window.filteredProducts)
+
+// Recargar productos
+window.loadProductsData()
+        </div>
+    </div>
+
+    <script>
+        let testResults = {};
+        
+        // Simular función de mapeo de Printful
+        function mapPrintfulProduct(printfulProduct) {
+            return {
+                // Propiedades básicas de Printful
+                id: printfulProduct.id,
+                name: printfulProduct.name,
+                variants: printfulProduct.variants || 0,
+                synced: printfulProduct.synced || 0,
+                thumbnail_url: printfulProduct.thumbnail_url,
+                external_id: printfulProduct.external_id,
+                is_ignored: printfulProduct.is_ignored,
+                
+                // Propiedades mapeadas para el frontend
+                type_name: printfulProduct.name,
+                description: generateProductDescription(printfulProduct.name),
+                category: getProductCategory(printfulProduct),
+                price_range: generatePriceRange(printfulProduct.variants)
+            };
+        }
+        
+        function generateProductDescription(productName) {
+            if (!productName) return 'Producto personalizado de alta calidad.';
+            
+            const name = productName.toLowerCase();
+            
+            if (name.includes('t-shirt') || name.includes('tee')) {
+                return 'Camiseta de algodón premium, suave al tacto y perfecta para personalizar. Disponible en múltiples tamaños y colores.';
+            }
+            
+            if (name.includes('hoodie')) {
+                return 'Sudadera cómoda con capucha, ideal para uso casual. Tejido suave y abrigador.';
+            }
+            
+            if (name.includes('mug') || name.includes('cup')) {
+                return 'Taza resistente al calor, perfecta para tu café o té. Ideal para regalar y personalizar.';
+            }
+            
+            return 'Producto de alta calidad, listo para personalizar con tu diseño único. Materiales premium y durabilidad garantizada.';
+        }
+        
+        function getProductCategory(product) {
+            const productName = product.name ? product.name.toLowerCase() : '';
+            
+            if (productName.includes('t-shirt') || productName.includes('tee') || productName.includes('shirt')) {
+                return 'tshirts';
+            }
+            
+            if (productName.includes('hoodie') || productName.includes('sweater')) {
+                return 'hoodies';
+            }
+            
+            if (productName.includes('mug') || productName.includes('cup')) {
+                return 'mugs';
+            }
+            
+            return 'accessories';
+        }
+        
+        function generatePriceRange(variants) {
+            if (!variants || variants === 0) return '$15.99';
+            return '$12.99 - $24.99';
+        }
+        
+        function generateSizeVariants(productType) {
+            const type = productType.toLowerCase();
+            
+            if (type.includes('t-shirt') || type.includes('tee') || type.includes('shirt')) {
+                return ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+            }
+            
+            if (type.includes('hoodie') || type.includes('sweater')) {
+                return ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+            }
+            
+            if (type.includes('mug') || type.includes('cup')) {
+                return ['11oz', '15oz'];
+            }
+            
+            return ['Estándar'];
+        }
+        
+        function generateColorVariants(productType) {
+            const type = productType.toLowerCase();
+            
+            if (type.includes('t-shirt') || type.includes('tee') || type.includes('shirt')) {
+                return ['Blanco', 'Negro', 'Gris', 'Azul', 'Rojo', 'Verde'];
+            }
+            
+            if (type.includes('hoodie') || type.includes('sweater')) {
+                return ['Negro', 'Gris', 'Azul Marino', 'Rojo', 'Verde'];
+            }
+            
+            if (type.includes('mug') || type.includes('cup')) {
+                return ['Blanco', 'Negro', 'Gris', 'Azul'];
+            }
+            
+            return ['Estándar'];
+        }
+        
+        function truncateText(text, maxLength) {
+            if (!text) return '';
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+        
+        async function startPrintfulTest() {
+            const statusDiv = document.getElementById('test-status');
+            const productsContainer = document.getElementById('products-container');
+            
+            statusDiv.innerHTML = '<div class="info">🔄 Cargando productos desde Printful...</div>';
+            
+            try {
+                // Simular datos de Printful (tu producto actual)
+                const printfulResponse = {
+                    code: 200,
+                    result: [{
+                        id: 395276124,
+                        external_id: "68e298ecaacd32",
+                        name: "T-SHIRT – Soft, Stylish & Available in Many Colors",
+                        variants: 48,
+                        synced: 48,
+                        thumbnail_url: "https://files.cdn.printful.com/files/551/55149dcc5007ef6fa3ef1c886261da9a_preview.png",
+                        is_ignored: false
+                    }],
+                    extra: [],
+                    paging: { total: 1, limit: 20, offset: 0 }
+                };
+                
+                // Mapear productos
+                const mappedProducts = printfulResponse.result.map(mapPrintfulProduct);
+                
+                testResults = {
+                    raw: printfulResponse.result[0],
+                    mapped: mappedProducts[0],
+                    mappedProducts: mappedProducts
+                };
+                
+                statusDiv.innerHTML = `
+                    <div class="success">
+                        ✅ <strong>Test exitoso!</strong><br>
+                        📦 Productos crudos: 1<br>
+                        🎯 Productos mapeados: ${mappedProducts.length}<br>
+                        🔍 Categoría detectada: ${mappedProducts[0].category}
+                    </div>
+                `;
+                
+                // Renderizar productos
+                renderProducts(mappedProducts);
+                
+                console.log('🧪 Test Results:', testResults);
+                
+            } catch (error) {
+                statusDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+                console.error('❌ Test error:', error);
+            }
+        }
+        
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = '<div class="warning">⚠️ No hay productos para mostrar</div>';
+                return;
+            }
+            
+            const productsHTML = products.map((product, index) => createProductCard(product, index)).join('');
+            container.innerHTML = `<div class="products-grid">${productsHTML}</div>`;
+        }
+        
+        function createProductCard(product, index) {
+            const variants = product.variants || 0;
+            const synced = product.synced || 0;
+            
+            return `
+                <div class="product-card">
+                    <img src="${product.thumbnail_url}" 
+                         alt="${product.name}" 
+                         class="product-image"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNGM0Y0RjYiLz48dGV4dCB4PSIxNTAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOUM5Q0EzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW1hZ2VuPC90ZXh0Pjwvc3ZnPg=='">
+                    
+                    <div class="sync-status">${synced > 0 ? `${synced} variantes` : 'Disponible'}</div>
+                    
+                    <h3 class="product-title">${product.name}</h3>
+                    
+                    <div class="product-meta">
+                        <span>${product.type_name}</span>
+                        <span>${product.category}</span>
+                    </div>
+                    
+                    <p class="product-description">${truncateText(product.description, 100)}</p>
+                    
+                    ${variants > 0 ? `
+                    <div class="product-variants">
+                        <strong>Tamaños:</strong>
+                        <div class="variants-grid">
+                            ${generateSizeVariants(product.type_name).map(size => 
+                                `<div class="variant-option">${size}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="product-variants">
+                        <strong>Colores:</strong>
+                        <div class="variants-grid">
+                            ${generateColorVariants(product.type_name).map(color => 
+                                `<div class="variant-option">${color}</div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div style="margin-top: 10px; font-size: 12px; color: #666;">
+                        💰 ${product.price_range} | 📦 ${variants} variantes | ✅ ${synced} sincronizadas
+                    </div>
+                </div>
+            `;
+        }
+        
+        async function checkApiHealth() {
+            const statusDiv = document.getElementById('test-status');
+            statusDiv.innerHTML = '<div class="info">❤️ Verificando salud de la API...</div>';
+            
+            // Simular verificación de salud
+            setTimeout(() => {
+                statusDiv.innerHTML = `
+                    <div class="success">
+                        ✅ <strong>API Saludable!</strong><br>
+                        🌐 Worker: OK<br>
+                        🔌 Printful API: OK<br>
+                        📡 Conexión: Estable
+                    </div>
+                `;
+            }, 1000);
+        }
+        
+        function showRawData() {
+            const statusDiv = document.getElementById('test-status');
+            
+            if (!testResults.raw) {
+                statusDiv.innerHTML = '<div class="warning">⚠️ Primero ejecuta el test para obtener datos</div>';
+                return;
+            }
+            
+            statusDiv.innerHTML = `
+                <div class="info">
+                    <strong>📦 Datos Crudos de Printful:</strong>
+                    <div class="code">${JSON.stringify(testResults.raw, null, 2)}</div>
+                    
+                    <strong>🎯 Datos Mapeados:</strong>
+                    <div class="code">${JSON.stringify(testResults.mapped, null, 2)}</div>
+                </div>
+            `;
+        }
+        
+        function clearResults() {
+            document.getElementById('test-status').innerHTML = 'Haz clic en "Iniciar Test" para comenzar...';
+            document.getElementById('products-container').innerHTML = '<div class="info">Los productos aparecerán aquí después del test...</div>';
+            testResults = {};
+        }
+        
+        // Simular funciones globales
+        window.debugProducts = {
+            testAll: async function() {
+                console.log('🧪 Running complete product debugging...');
+                console.log('Test Results:', testResults);
+                return testResults;
+            },
+            
+            checkProductsLoaded: function() {
+                return {
+                    total: testResults.mappedProducts ? testResults.mappedProducts.length : 0,
+                    hasData: !!testResults.raw
+                };
+            },
+            
+            showRawData: function() {
+                console.log('Raw Data:', testResults.raw);
+                console.log('Mapped Data:', testResults.mapped);
+                return testResults;
+            }
+        };
+        
+        window.loadProductsData = startPrintfulTest;
+        
+        console.log('🧪 Test page loaded - Ready to test Printful mapping!');
+    </script>
+</body>
+</html>

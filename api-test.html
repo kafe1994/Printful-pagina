@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Printful Worker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b35;
+        }
+        .success {
+            border-left-color: #4caf50;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        .loading {
+            border-left-color: #ff9800;
+        }
+        button {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #e55a2b;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .status {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 API Test - Printful Worker</h1>
+    <p>Esta página prueba la conexión con el worker de Cloudflare para verificar que la API esté funcionando correctamente.</p>
+
+    <div class="test-section loading" id="worker-health">
+        <div class="status">🔄 Verificando salud del worker...</div>
+        <div id="worker-result"></div>
+    </div>
+
+    <div class="test-section loading" id="api-products">
+        <div class="status">🔄 Probando endpoint de productos...</div>
+        <div id="products-result"></div>
+    </div>
+
+    <div class="test-section loading" id="api-product-detail">
+        <div class="status">🔄 Probando producto específico...</div>
+        <div id="product-detail-result"></div>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <button onclick="runAllTests()">▶️ Ejecutar todas las pruebas</button>
+        <button onclick="clearResults()">🗑️ Limpiar resultados</button>
+    </div>
+
+    <script>
+        const API_BASE = 'https://printful-worker.liendoalejandro94.workers.dev/api';
+
+        async function testWorkerHealth() {
+            const section = document.getElementById('worker-health');
+            const resultDiv = document.getElementById('worker-result');
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                section.className = 'test-section success';
+                section.querySelector('.status').textContent = '✅ Worker saludable';
+                resultDiv.innerHTML = `
+                    <p><strong>Status:</strong> ${data.status}</p>
+                    <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+                    <p><strong>Version:</strong> ${data.version}</p>
+                    <p><strong>API Configurada:</strong> ${data.api_configured ? 'Sí' : 'No'}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                section.className = 'test-section error';
+                section.querySelector('.status').textContent = '❌ Error en worker';
+                resultDiv.innerHTML = `
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function testApiProducts() {
+            const section = document.getElementById('api-products');
+            const resultDiv = document.getElementById('products-result');
+            
+            try {
+                const response = await fetch(`${API_BASE}/products`);
+                const data = await response.json();
+                
+                // Verificar estructura de respuesta
+                const hasValidStructure = data && data.code === 200 && data.result && Array.isArray(data.result);
+                
+                if (hasValidStructure) {
+                    section.className = 'test-section success';
+                    section.querySelector('.status').textContent = `✅ API funcionando - ${data.result.length} productos`;
+                    resultDiv.innerHTML = `
+                        <p><strong>Código:</strong> ${data.code}</p>
+                        <p><strong>Total productos:</strong> ${data.result.length}</p>
+                        ${data.paging ? `<p><strong>Paging:</strong> ${JSON.stringify(data.paging)}</p>` : ''}
+                        <p><strong>Ejemplo de producto:</strong></p>
+                        <pre>${JSON.stringify(data.result[0], null, 2)}</pre>
+                    `;
+                } else {
+                    section.className = 'test-section error';
+                    section.querySelector('.status').textContent = '❌ Estructura de respuesta inválida';
+                    resultDiv.innerHTML = `
+                        <p><strong>Respuesta recibida:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                section.className = 'test-section error';
+                section.querySelector('.status').textContent = '❌ Error en API de productos';
+                resultDiv.innerHTML = `
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function testApiProductDetail() {
+            const section = document.getElementById('api-product-detail');
+            const resultDiv = document.getElementById('product-detail-result');
+            
+            try {
+                const response = await fetch(`${API_BASE}/products/395276124`);
+                const data = await response.json();
+                
+                // Verificar estructura de respuesta del producto específico
+                const hasValidStructure = data && data.code === 200 && data.result && data.result.sync_product;
+                
+                if (hasValidStructure) {
+                    const product = data.result.sync_product;
+                    const variants = data.result.sync_variants || [];
+                    
+                    section.className = 'test-section success';
+                    section.querySelector('.status').textContent = `✅ Producto específico funcionando - ${variants.length} variantes`;
+                    resultDiv.innerHTML = `
+                        <p><strong>Código:</strong> ${data.code}</p>
+                        <p><strong>Producto:</strong> ${product.title}</p>
+                        <p><strong>Variantes:</strong> ${variants.length}</p>
+                        <p><strong>Estructura del producto:</strong></p>
+                        <pre>${JSON.stringify(product, null, 2)}</pre>
+                    `;
+                } else {
+                    section.className = 'test-section error';
+                    section.querySelector('.status').textContent = '❌ Estructura de producto inválida';
+                    resultDiv.innerHTML = `
+                        <p><strong>Respuesta recibida:</strong></p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                section.className = 'test-section error';
+                section.querySelector('.status').textContent = '❌ Error en producto específico';
+                resultDiv.innerHTML = `
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function runAllTests() {
+            // Limpiar resultados previos
+            clearResults();
+            
+            // Ejecutar todas las pruebas
+            await testWorkerHealth();
+            await testApiProducts();
+            await testApiProductDetail();
+        }
+
+        function clearResults() {
+            const sections = ['worker-health', 'api-products', 'api-product-detail'];
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                section.className = 'test-section loading';
+                section.querySelector('.status').textContent = '🔄 Esperando prueba...';
+                document.getElementById(id.replace('-', '-result')).innerHTML = '';
+            });
+        }
+
+        // Ejecutar pruebas automáticamente al cargar la página
+        window.addEventListener('load', runAllTests);
+    </script>
+</body>
+</html>
